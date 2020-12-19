@@ -8,7 +8,7 @@ package MatrixMultiplication;
 import java.util.Date;
 
 /**
- *
+ *IndiviMultiplier
  * @author AbdallaEssam
  */
 public class MainExample {
@@ -18,9 +18,22 @@ public class MainExample {
         double matrix2[][] = MatrixGenerator.generate(1000, 1000);
         double result[][] = new double[matrix1.length][matrix2[0].length];
         Date start = new Date();
-        Multiplier.multiply(matrix1, matrix2, result);
+       GroupMultiplier.multiply(matrix1, matrix2, result);
         Date end = new Date();        
 
         System.out.printf("Individual Parallel: %d%n", end.getTime() - start.getTime());
+        
+        
+        Date start1 = new Date();
+       GroupMultiplier.multiply(matrix1, matrix2, result);
+        Date end1 = new Date();        
+
+        System.out.printf("group Parallel: %d%n", end1.getTime() - start1.getTime());
+        
+        Date start2 = new Date();
+       RawMultiplier.multiply(matrix1, matrix2, result);
+        Date end2 = new Date();        
+
+        System.out.printf("raw Parallel: %d%n", end2.getTime() - start2.getTime());
     }
 }

@@ -38,9 +38,13 @@ public class PetersonSolution implements Runnable {
         
         //critical section      
         if (threadId == 0) {
+            synchronized (this){
             count = count + 1;
+        }
         } else {
+            synchronized (this){
             count = count - 1;
+            }
         }
         System.out.println("T" + threadId + " COUNT:" + count);
         //exit section

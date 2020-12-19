@@ -16,6 +16,8 @@ import java.util.logging.Logger;
 public class Barrier_sem extends Barrier{
     private final Semaphore mutex;
     private final Semaphore blockerSemaphore;
+    int i;
+    int number; 
     
     public Barrier_sem(int waitingCount){
         super(waitingCount);
@@ -23,8 +25,23 @@ public class Barrier_sem extends Barrier{
         blockerSemaphore = new Semaphore(0);
     }
     
-    public void barrierPoint(){
-        
-    }
+   public void barrierPoint(){
+     
+        try {
+            mutex.acquire();
+            i++;
+       if(i == number)
+       {
+            blockerSemaphore.release();
+       }
+        mutex.release();
+       
+         blockerSemaphore.acquire();
+         blockerSemaphore.release();
     
+}
+        catch (InterruptedException ex){
+            Logger.getLogger(Barrier_sem.class.getName()).log(Level.SEVERE , null ,ex);
+        }
+    }
 }
